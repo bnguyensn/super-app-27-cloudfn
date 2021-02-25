@@ -1,19 +1,6 @@
-import dotenv from 'dotev';
 import got from 'got';
 
-dotenv.config();
-
 const TOKEN_ENDPOINT = `https://github.com/login/oauth/access_token`;
-
-function setCors(res, req) {
-  res.set('Access-Control-Allow-Origin', '*');
-
-  if (req.method === 'OPTIONS') {
-    res.set('Access-Control-Allow-Methods', 'GET');
-    res.set('Access-Control-Allow-Headers', 'Content-Type');
-    res.set('Access-Control-Max-Age', '3600');
-  }
-}
 
 /**
  * https://cloud.google.com/functions/docs/writing/http
