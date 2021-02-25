@@ -41,6 +41,9 @@ export async function getAccessToken(req, res) {
       return res.status(204).send('');
     }
 
+    // The request's credentials mode will be 'include' so this header is needed
+    res.set('Access-Control-Allow-Credentials', 'true');
+
     // ----- Main execution ----- //
 
     const { code } = req.query;
