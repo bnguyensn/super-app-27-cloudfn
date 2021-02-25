@@ -46,7 +46,12 @@ export async function getAccessToken(req, res) {
       return res.status(400).json(body);
     }
 
-    res.cookie('accessToken', body.access_token);
+    res.cookie('accessToken', body.access_token, {
+      httpOnly: true,
+      maxAge: 86400000, // 1 day,
+      secure: true,
+      sameSite: 'None',
+    });
 
     res.json(body);
   } catch (error) {
