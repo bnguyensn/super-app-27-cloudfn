@@ -2,6 +2,19 @@ import got from 'got';
 
 const TOKEN_ENDPOINT = `https://github.com/login/oauth/access_token`;
 
+function getAccessControlAllowedOrigin(reqOrigin) {
+  // We expect ALLOWED_ORIGINS to be a semicolon-separated string of origins
+  const allowedOrigins = process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(';')
+    : [];
+
+  if (allowedOrigins.includes(reqOrigin)) {
+    return reqOrigin;
+  }
+
+  return '';
+}
+
 /**
  * https://cloud.google.com/functions/docs/writing/http
  *
@@ -13,16 +26,22 @@ const TOKEN_ENDPOINT = `https://github.com/login/oauth/access_token`;
  */
 export async function getAccessToken(req, res) {
   try {
-    // Set CORS
-    res.set('Access-Control-Allow-Origin', '*');
+    // ----- Handle CORS ----- //
+
+    const allowedOrigin = getAccessControlAllowedOrigin(req.get('Origin'));
+    if (allowedOrigin) {
+      res.set('Access-Control-Allow-Origin', allowedOrigin);
+    }
 
     // Send back appropriate response for OPTIONS requests
     if (req.method === 'OPTIONS') {
       res.set('Access-Control-Allow-Methods', 'GET');
       res.set('Access-Control-Allow-Headers', 'Content-Type');
-      res.set('Access-Control-Max-Age', '3600');
+
       return res.status(204).send('');
     }
+
+    // ----- Main execution ----- //
 
     const { code } = req.query;
 
