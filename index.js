@@ -42,7 +42,11 @@ export async function getAccessToken(req, res) {
       responseType: 'json',
     });
 
-    console.log(body);
+    if (body.error) {
+      return res.status(400).json(body);
+    }
+
+    res.cookie('accessToken', body.access_token);
 
     res.json(body);
   } catch (error) {
