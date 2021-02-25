@@ -1,0 +1,27 @@
+name: Deploy Cloud Function
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to GCP
+        uses: google-github-actions/deploy-cloud-functions@main
+        id: deploy
+        with:
+          name: get-github-access-token
+          runtime: nodejs12
+          credentials: ${{ secrets.GCP_CREDENTIALS }}
+          source_dir: build
+          entry_point: getAccessToken
+          region: europe-west2
+          env_vars: CLIENT_ID=${{ secrets.CLIENT_ID }},CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
+          description: A GCP HTTP cloud function that act as a middleware server to get GitHub access tokens
+          project_id: bnguyensn-2468

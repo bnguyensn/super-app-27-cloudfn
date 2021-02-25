@@ -1,0 +1,7 @@
+node_modules
+__mocks__
+.cache
+public
+.vs
+.idea
+build

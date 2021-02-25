@@ -1,0 +1,29 @@
+{
+  "name": "super-app-27-cloudfn",
+  "version": "1.0.0",
+  "description": "The cloud function for super-app-27",
+  "main": "index.js",
+  "engines": {
+    "node": ">=12"
+  },
+  "scripts": {
+    "start": "node .",
+    "build": "babel --delete-dir-on-start --out-dir build --copy-files index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "bnguyensn",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.1",
+    "@babel/preset-env": "^7.13.5",
+    "babel": "^6.23.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.20.0",
+    "eslint-config-prettier": "^7.2.0",
+    "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "got": "^11.8.1"
+  }
+}
