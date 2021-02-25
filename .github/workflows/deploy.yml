@@ -27,12 +27,12 @@ jobs:
         uses: google-github-actions/deploy-cloud-functions@main
         id: deploy
         with:
+          project_id: bnguyensn-2468
           name: get-github-access-token
+          description: A GCP HTTP cloud function that act as a middleware server to get GitHub access tokens
           runtime: nodejs12
+          region: europe-west2
           credentials: ${{ secrets.GCP_CREDENTIALS }}
           source_dir: build
           entry_point: getAccessToken
-          region: europe-west2
           env_vars: CLIENT_ID=${{ secrets.CLIENT_ID }},CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
-          description: A GCP HTTP cloud function that act as a middleware server to get GitHub access tokens
-          project_id: bnguyensn-2468
