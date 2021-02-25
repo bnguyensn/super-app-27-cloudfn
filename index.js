@@ -42,8 +42,12 @@ export async function getAccessToken(req, res) {
       responseType: 'json',
     });
 
-    res.json(JSON.parse(body));
+    console.log(body);
+
+    res.json(body);
   } catch (error) {
+    console.log(error);
+
     res.status(500).send({
       message: error.message,
     });
