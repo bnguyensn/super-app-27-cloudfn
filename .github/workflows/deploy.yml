@@ -38,4 +38,4 @@ jobs:
           credentials: ${{ secrets.GCP_CREDENTIALS }}
           source_dir: build
           entry_point: getAccessToken
-          env_vars: CLIENT_ID=${{ secrets.CLIENT_ID }},CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
+          env_vars: CLIENT_ID=${{ secrets.CLIENT_ID }},CLIENT_SECRET=${{ secrets.CLIENT_SECRET }},CORS_ORIGIN=${{ secrests.ALLOWED_ORIGINS }}
